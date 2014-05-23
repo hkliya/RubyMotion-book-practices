@@ -1,4 +1,4 @@
-class AppDelegate
+class SuperAppDelegate
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     true
   end
