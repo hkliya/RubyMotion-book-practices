@@ -14,6 +14,12 @@ class AppDelegate
     @window.addSubview(@add_button)
 
     @add_button.addTarget(self, action: "add_tapped", forControlEvents: UIControlEventTouchUpInside)
+
+    @remove_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
+    @remove_button.setTitle("Remove", forState: UIControlStateNormal)
+    @remove_button.sizeToFit
+    @remove_button.frame = CGRect.new([@add_button.frame.origin.x + @add_button.frame.size.width + 10, @add_button.frame.origin.y], @remove_button.frame.size)
+    @window.addSubview(@remove_button)
     true
   end
 
