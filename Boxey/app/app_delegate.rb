@@ -22,6 +22,8 @@ class AppDelegate
     @window.addSubview(@remove_button)
 
     @remove_button.addTarget(self, action: "remove_tapped", forControlEvents: UIControlEventTouchUpInside)
+
+    add_labels_to_boxes
     true
   end
 
@@ -31,12 +33,11 @@ class AppDelegate
     last_view = @window.subviews[0]
     new_view.frame = CGRect.new([last_view.frame.origin.x, last_view.frame.origin.y + last_view.frame.size.height + 10], last_view.frame.size)
     @window.insertSubview(new_view, atIndex: 0)
+    add_labels_to_boxes
   end
 
   def remove_tapped
-    other_views = @window.subviews.select do |view|
-      not view.is_a? UIButton
-    end
+    other_views = self.boxes
     @last_view = other_views.last
 
     if @last_view and other_views.count > 1
@@ -50,6 +51,33 @@ class AppDelegate
       }, completion: lambda { |finished|
         @last_view.removeFromSuperview
       })
+    end
+  end
+
+  def add_label_to_box(box)
+    box.subviews.each do |subview|
+      subview.removeFromSuperview
+    end
+
+    index_of_box = @window.subviews.index(box)
+    label = UILabel.alloc.initWithFrame(CGRectZero)
+    label.text = "#{index_of_box}"
+    label.textColor = UIColor.whiteColor
+    label.backgroundColor = UIColor.clearColor
+    label.sizeToFit
+    label.center = [box.frame.size.width / 2, box.frame.size.height / 2]
+    box.addSubview(label)
+  end
+
+  def boxes
+    @window.subviews.select do |view|
+      not (view.is_a?(UIButton) or view.is_a?(UILabel))
+    end
+  end
+
+  def add_labels_to_boxes
+    self.boxes.each do |box|
+      add_label_to_box(box)
     end
   end
 end
