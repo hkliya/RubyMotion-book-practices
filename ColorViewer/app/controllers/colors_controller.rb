@@ -27,4 +27,19 @@ class ColorsController < UIViewController
       self.view.addSubview(button)
     end
   end
+
+  def red_tapped
+    controller = ColorDetailController.alloc.initWithColor(UIColor.redColor)
+    self.navigationController.pushViewController(controller, animated: true)
+  end
+
+  def yellow_tapped
+    controller = ColorDetailController.alloc.initWithColor(UIColor.yellowColor)
+    self.navigationController.pushViewController(controller, animated: true)
+  end
+
+  def blue_tapped
+    controller = ColorDetailController.alloc.initWithColor(UIColor.blueColor)
+    self.navigationController.pushViewController(controller, animated: true)
+  end
 end
