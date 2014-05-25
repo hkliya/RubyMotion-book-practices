@@ -2,6 +2,7 @@ class ColorsController < UIViewController
   def viewDidLoad
     super
 
+    self.title = "Colors"
     self.view.backgroundColor = UIColor.whiteColor
 
     @label = UILabel.alloc.initWithFrame(CGRectZero)
